@@ -1,0 +1,19 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "url": "/assets/1-background.png",
+      "alt": "A beautiful sunrise"
+    },
+    {
+      "id": 2,
+      "url": "/assets/image2.jpg",
+      "alt": "A serene mountain"
+    },
+    {
+      "id": 3,
+      "url": "/assets/image3.jpg",
+      "alt": "A bustling cityscape"
+    }
+  ]
+}
