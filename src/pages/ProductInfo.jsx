@@ -38,10 +38,10 @@ const ProductInfo = ({ pageId }) => {
       }}
     >
       <div className="product-content">
-        <div>{articleText.header}</div>
+        <div className="product-header">{articleText.header}</div>
         <Chip text={articleText.banner} />
-        <div>{articleText.title}</div>
-        <div>{articleText.description}</div>
+        <div className="product-title">{articleText.title}</div>
+        <div className="product-description">{articleText.description}</div>
         {articleText.cta && articleText.cta.text && (
           <CtaButton {...ctaButtonProps} />
         )}

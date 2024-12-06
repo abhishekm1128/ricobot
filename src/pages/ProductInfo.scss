@@ -3,10 +3,14 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 20px;
+    margin-top: 40px;
     height: auto;
     .product-content {
-        max-width: 980px;
-        padding: 0px 22px;
+        max-width: 944px;
+        padding: 0px 40px;
         margin: 0px auto;
+        .product-header {
+            width: 220px;
+        }
     }
 }
