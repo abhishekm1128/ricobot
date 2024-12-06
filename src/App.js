@@ -2,7 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import ProductInfo from "./pages/ProductInfo";
-import "./global.scss";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./GlobalStyles";
+import theme from './theme';
 
 const basePages = [
   {
@@ -16,20 +18,21 @@ const basePages = [
 ];
 
 const App = () => {
-
   return (
-    <Routes>
-      {basePages.map((page) => {
-        console.log(page.routeLink)
-        return (
-        <Route
-        key={page.pageId}
-          path={page.routeLink}
-          element={<ProductInfo pageId={page.pageId} />}
-        />
-        )
-      })}
-    </Routes>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Routes>
+        {basePages.map((page) => {
+          return (
+            <Route
+              key={page.pageId}
+              path={page.routeLink}
+              element={<ProductInfo pageId={page.pageId} />}
+            />
+          );
+        })}
+      </Routes>
+    </ThemeProvider>
   );
 };
 

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import './Chip.scss';
 
 const Chip = ({ text }) => {
   return (
-    <div>
-      <h1>{text}</h1>
+    <div className="chip-container">
+      <div className="chip-text">
+        {text}
+      </div>
     </div>
   );
 };

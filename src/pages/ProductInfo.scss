@@ -1,0 +1,12 @@
+.product-container {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    height: auto;
+    .product-content {
+        max-width: 980px;
+        padding: 0px 22px;
+        margin: 0px auto;
+    }
+}

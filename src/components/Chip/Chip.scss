@@ -1,0 +1,13 @@
+.chip-container {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #fff;
+  background-color: transparent;
+  .chip-text {
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+  }
+}
