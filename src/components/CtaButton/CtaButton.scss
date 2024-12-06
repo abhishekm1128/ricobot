@@ -1,0 +1,21 @@
+.cta-button {
+    padding: 12px 30px;
+    background-color: #ffffff;
+    font-family: inherit;
+    color: #000000;
+    border: none;
+    border-radius: 25px; /* Fully rounded edges */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds depth */
+    transition: all 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .cta-button:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Elevated shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  .cta-button:active {
+    transform: translateY(1px); /* Pressed-down effect */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }

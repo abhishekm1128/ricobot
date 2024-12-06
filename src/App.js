@@ -1,29 +1,36 @@
-import logo from "./logo.svg";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ImageGallery from "./ImageGallery";
+import ProductInfo from "./pages/ProductInfo";
+import "./global.scss";
 
-function App() {
+const basePages = [
+  {
+    pageId: "ricobot",
+    routeLink: "/ricobot",
+  },
+  {
+    pageId: "second-page-test",
+    routeLink: "/secondpage",
+  },
+];
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <body>
-        <ImageGallery />
-      </body>
-    </div>
+    <Routes>
+      {basePages.map((page) => {
+        console.log(page.routeLink)
+        return (
+        <Route
+        key={page.pageId}
+          path={page.routeLink}
+          element={<ProductInfo pageId={page.pageId} />}
+        />
+        )
+      })}
+    </Routes>
   );
-}
+};
 
 export default App;
