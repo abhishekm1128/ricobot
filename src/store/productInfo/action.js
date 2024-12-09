@@ -12,7 +12,7 @@ export const getPageData = (pageId) => async (dispatch) => {
   const URL = `${hostUrl}${pageId}-pagedata`;
 
   try {
-    const res = await axios.get(URL).then((response) => response.data);
+    const res = await axios.get(URL).then((response) => response.data.data);
 
     dispatch({
       type: GET_PAGEDATA,
