@@ -32,12 +32,13 @@
     width: 90%;
     padding: 7px;
     object-fit: cover;
-    border-radius: 8px; /* Rounded corners for the image itself */
+    border-radius: 14px; /* Rounded corners for the image itself */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     @media (min-width: 481px) {
         width: 80px;
         height: 80px;
         border-radius: 8px;
+        padding: 0px;
     }
 }
 

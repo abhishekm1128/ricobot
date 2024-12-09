@@ -37,6 +37,10 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
               className={`thumbnail ${
                 selectedThumbnailId === image.id ? "selected-thumbnail" : ""
               }`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src="/assets/1-thumbnail.png";
+              }}
             />
           </div>
         ))}

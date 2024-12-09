@@ -28,6 +28,15 @@ const ProductInfo = ({ pageId }) => {
     }
   }, [pageData]);
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundImage;
+
+    img.onerror = () => {
+      setBackgroundImage('/assets/1-background.png'); 
+    };
+  }, [backgroundImage]); 
+
   const { articleText, articleImages } = pageData || {};
   const ctaButtonProps = {
     text: articleText.cta && articleText.cta.text,
@@ -58,7 +67,14 @@ const ProductInfo = ({ pageId }) => {
         />
         {foregroundImage && (
           <div className="foreground">
-            <img src={foregroundImage} alt="Tablet" />
+            <img
+              src={foregroundImage}
+              alt="Foreground"
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src="/assets/1-foreground-cutout.png";
+              }}
+            />
           </div>
         )}
 
