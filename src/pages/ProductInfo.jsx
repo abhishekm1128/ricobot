@@ -18,6 +18,14 @@ const ProductInfo = ({ pageId }) => {
   useEffect(() => {
     dispatch(getPageData());
   }, [dispatch]);
+  
+  useEffect(() => {
+    if (pageData?.articleImages?.length > 0) {
+      const [image] = pageData.articleImages;
+      setBackgroundImage(image['background-url']);
+      setForegroundImage(image['foreground-url']);
+    }
+  }, [pageData]);
 
   const { articleText, articleImages } = pageData || {};
   const ctaButtonProps = {
@@ -42,8 +50,6 @@ const ProductInfo = ({ pageId }) => {
         className="background"
         style={{
           backgroundImage: `
-            linear-gradient(to left, rgba(37, 45, 55, 0) 40%, #09101A 100%), 
-            linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, #000000 100%),
             url(${backgroundImage})
           `,
         }}
@@ -53,6 +59,8 @@ const ProductInfo = ({ pageId }) => {
           <img src={foregroundImage} alt="Tablet" />
         </div>
       )}
+
+    <div className="gradient-overlay" />
       <div className="product-content">
         <div className="product-header">{articleText.header}</div>
         <Chip text={articleText.banner} />

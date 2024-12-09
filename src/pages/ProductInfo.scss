@@ -6,6 +6,7 @@
   background-position: center;
   position: absolute;
   top: 0;
+  min-width: 880px;
   left: 0;
   z-index: 1; /* Background stays behind */
 
@@ -13,6 +14,8 @@
     max-width: 944px;
     padding: 0px 40px;
     margin: 0px auto;
+    position: relative;
+    z-index: 4;
     .product-header {
       width: 220px;
       padding-bottom: 40px;
@@ -44,7 +47,12 @@
       max-height: 768px;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to left, rgba(37, 45, 55, 0) 40%, #09101A 100%), linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, #000000 100%);
+      background: linear-gradient(
+          to left,
+          rgba(37, 45, 55, 0) 40%,
+          #09101a 100%
+        ),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, #000000 100%);
       mix-blend-mode: multiply; /* Blend with the image */
     }
   }
@@ -59,13 +67,24 @@
     z-index: 3; /* Above background and gradient */
     pointer-events: none; /* Prevent interaction */
     img {
-        height: -webkit-fill-available;
+      height: -webkit-fill-available;
     }
     @media (max-width: 768px) {
-        bottom: -70px; /* Mobile overflow */
-        width: 40%; /* Mobile size */
+      // bottom: -70px; /* Mobile overflow */
+      // width: 40%; /* Mobile size */
     }
-}
+  }
 
-  
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3; /* Top layer */
+    margin-top: 0px;
+    /* Gradient Definitions */
+    background: linear-gradient(to left, rgba(37, 45, 55, 0) 40%, #09101a 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, #000000 100%);
+  }
 }
