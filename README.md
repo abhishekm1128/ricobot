@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# RICOBOT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Ricobot project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Steps to Run
 
-In the project directory, you can run:
+1. Clone the Repo\
+2. Do an 'npm install'\
+3. Start mock server with `npm run mock-server`\
+4. Run app with `npm start`\
+5. Open [http://localhost:3000/ricobot] to view it in your browser
 
 ### `npm start`
 
