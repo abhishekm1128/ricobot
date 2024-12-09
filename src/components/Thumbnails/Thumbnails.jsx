@@ -3,10 +3,14 @@ import "./Thumbnails.scss";
 
 const Thumbnails = ({ images, onThumbnailClick }) => {
   const [selectedThumbnailId, setSelectedThumbnailId] = useState(null);
+  // disabling the lint rule, as selectedThumbnailIndex might be needed in future
+  // eslint-disable-next-line no-unused-vars
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
 
   // Handle Thumbnail click
-  const handleThumbnailClick = (id, backgroundUrl, foregroundUrl) => {
+  const handleThumbnailClick = (id, backgroundUrl, foregroundUrl, index) => {
     setSelectedThumbnailId(id);
+    setSelectedThumbnailIndex(index);
     onThumbnailClick(backgroundUrl, foregroundUrl || ""); // Update parent to set Background and Foreground
   };
 
@@ -17,11 +21,30 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
     }
   }, [images]);
 
+  // Effect to change slides every 3 seconds
+  useEffect(() => {
+    if (images?.length > 0) {
+      const interval = setInterval(() => {
+        setSelectedThumbnailIndex((prevIndex) => {
+          const nextIndex = (prevIndex + 1) % images.length;
+          const nextImage = images[nextIndex];
+          setSelectedThumbnailId(nextImage.id);
+          onThumbnailClick(
+            nextImage["background-url"],
+            nextImage["foreground-url"] || ""
+          );
+          return nextIndex;
+        });
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [images, onThumbnailClick]);
+
   return (
     <div className="thumbnail-container">
-      {images &&
-        images.length > 0 &&
-        images.sort((a, b) => a.order - b.order).map((image) => (
+      {images?.length > 0 &&
+        images.map((image, index) => (
           <div
             key={image.id}
             className="thumbnail-wrapper"
@@ -29,7 +52,8 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
               handleThumbnailClick(
                 image.id,
                 image["background-url"],
-                image["foreground-url"]
+                image["foreground-url"],
+                index
               )
             }
           >
@@ -41,8 +65,13 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
               }`}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
-                currentTarget.src="/assets/1-thumbnail.png";
+                currentTarget.src = "/assets/1-thumbnail.png";
               }}
+            />
+            <div
+              className={`thumbnail-overlay ${
+                selectedThumbnailId === image.id ? "selected-thumbnail" : ""
+              }`}
             />
           </div>
         ))}

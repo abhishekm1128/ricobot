@@ -16,15 +16,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         articleText: action.payload["article-text"] || {},
-        articleImages: action.payload["article-images"] || [],
+        articleImages:
+          (action.payload["article-images"]?.length > 0 &&
+            action.payload["article-images"].sort(
+              (a, b) => a.order - b.order
+            )) ||
+          [],
         isLoading: false,
-        error: null
+        error: null,
       };
     case GET_PAGEDATA_ERROR:
       return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }
-}
+};
 
 export default reducer;
