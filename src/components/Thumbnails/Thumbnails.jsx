@@ -4,9 +4,9 @@ import './Thumbnails.scss';  // Assuming your SCSS is compiled to this CSS file
 const Thumbnails = ({ images, onThumbnailClick }) => {
   const [selectedThumbnailId, setSelectedThumbnailId] = useState(null);
 
-  const handleThumbnailClick = (id, backgroundUrl) => {
+  const handleThumbnailClick = (id, backgroundUrl, foregroundUrl) => {
     setSelectedThumbnailId(id);
-    onThumbnailClick(backgroundUrl);  // This triggers the parent to update the background
+    onThumbnailClick(backgroundUrl, foregroundUrl || '');  // This triggers the parent to update the background
   };
 
   return (
@@ -15,7 +15,7 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
         <div
           key={image.id}
           className="thumbnail-wrapper"
-          onClick={() => handleThumbnailClick(image.id, image['background-url'])}
+          onClick={() => handleThumbnailClick(image.id, image['background-url'], image['foreground-url'])}
         >
           <img
             src={image['thumbnail-url']}

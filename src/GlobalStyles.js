@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .product-content {
-        padding: 0px 40px;
+        padding: 0px 20px;
     }
     @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
         .product-header {

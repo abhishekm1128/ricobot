@@ -26,17 +26,33 @@ const ProductInfo = ({ pageId }) => {
     linkOut: articleText.cta && articleText.cta.linkOut,
   };
 
-  const handleThumbnailClick = (backgroundUrl) => {
+  const handleThumbnailClick = (backgroundUrl, foregroundUrl) => {
     setBackgroundImage(backgroundUrl);
+    setForegroundImage(foregroundUrl);
   };
 
   return (
     <div
       className="product-container"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-      }}
+      // style={{
+      //   backgroundImage: `url(${backgroundImage})`,
+      // }}
     >
+      <div
+        className="background"
+        style={{
+          backgroundImage: `
+            linear-gradient(to left, rgba(37, 45, 55, 0) 40%, #09101A 100%), 
+            linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, #000000 100%),
+            url(${backgroundImage})
+          `,
+        }}
+      />
+      {foregroundImage && (
+        <div className="foreground">
+          <img src={foregroundImage} alt="Tablet" />
+        </div>
+      )}
       <div className="product-content">
         <div className="product-header">{articleText.header}</div>
         <Chip text={articleText.banner} />
