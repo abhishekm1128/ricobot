@@ -3,6 +3,12 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap');
 
+    :root {
+        --mobile-width: ${({ theme }) => theme.breakpoints.mobile};
+        --tablet-width: ${({ theme }) => theme.breakpoints.tablet};
+        --desktop-width: ${({ theme }) => theme.breakpoints.desktop};
+    }
+
     body {
         margin: 0;
         font-family: 'Raleway';
