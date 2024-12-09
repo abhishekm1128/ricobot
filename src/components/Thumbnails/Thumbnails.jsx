@@ -4,11 +4,13 @@ import "./Thumbnails.scss";
 const Thumbnails = ({ images, onThumbnailClick }) => {
   const [selectedThumbnailId, setSelectedThumbnailId] = useState(null);
 
+  // Handle Thumbnail click
   const handleThumbnailClick = (id, backgroundUrl, foregroundUrl) => {
     setSelectedThumbnailId(id);
-    onThumbnailClick(backgroundUrl, foregroundUrl || ""); // This triggers the parent to update the background
+    onThumbnailClick(backgroundUrl, foregroundUrl || ""); // Update parent to set Background and Foreground
   };
 
+  // Effect to set selected thumbnail
   useEffect(() => {
     if (images?.length > 0) {
       setSelectedThumbnailId(images[0].id);

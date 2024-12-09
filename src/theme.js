@@ -1,3 +1,5 @@
+// Setting breakpoints for Styles
+
 const theme = {
     breakpoints: {
         mobile: '480px',

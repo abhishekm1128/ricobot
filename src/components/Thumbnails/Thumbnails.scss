@@ -14,14 +14,13 @@
 .thumbnail-wrapper {
     position: relative;
     flex: 0 0 30%;
-    padding: 0px; /* Increased padding for space between content and border */
+    padding: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0px;
-    border-radius: 12px; /* Optional: matches the rounded corners of the thumbnail */
+    border-radius: 12px;
     @media (min-width: 481px) {
-         //border-radius: 12px; 
          flex: none;
          padding: 12px;
          margin: 12px 0px;
@@ -32,7 +31,7 @@
     width: 90%;
     padding: 7px;
     object-fit: cover;
-    border-radius: 14px; /* Rounded corners for the image itself */
+    border-radius: 14px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     @media (min-width: 481px) {
         width: 80px;
@@ -42,7 +41,6 @@
     }
 }
 
-/* On hover: increase size and grow upward */
 .thumbnail:hover {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -51,7 +49,6 @@
     }
 }
 
-/* The selected thumbnail takes the same final state as the hover effect */
 .selected-thumbnail {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
     border: 2px solid #fff;

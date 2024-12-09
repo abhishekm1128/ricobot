@@ -7,7 +7,7 @@ export const initialState = {
   error: null,
 };
 
-export default function (state = initialState, action) {
+const reducer = (state = initialState, action) => {
   if (!action.payload) return state;
   switch (action.type) {
     case GET_PAGEDATA_START:
@@ -26,3 +26,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default reducer;

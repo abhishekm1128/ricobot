@@ -8,18 +8,19 @@ import Thumbnails from "../components/Thumbnails/Thumbnails";
 import "./ProductInfo.scss";
 
 const ProductInfo = ({ pageId }) => {
-  console.log(pageId);
-
+  // Initialize state for Background and Foreground Image URLs
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [foregroundImage, setForegroundImage] = useState(null);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const pageData = useSelector((state) => state.pagedata);
 
+  // Effect to fetch metadata for current page based on pageId
   useEffect(() => {
     dispatch(getPageData(pageId));
-  }, [dispatch]);
+  }, [dispatch, pageId]);
 
+  // Setting default background and foreground after fetching pageData
   useEffect(() => {
     if (pageData?.articleImages?.length > 0) {
       const [image] = pageData.articleImages;
@@ -28,6 +29,7 @@ const ProductInfo = ({ pageId }) => {
     }
   }, [pageData]);
 
+  // Defaulting background image, if the image load fails
   useEffect(() => {
     const img = new Image();
     img.src = backgroundImage;
@@ -37,20 +39,24 @@ const ProductInfo = ({ pageId }) => {
     };
   }, [backgroundImage]);
 
+  // Destructuring pageData
   const { articleText, articleImages, isLoading, error } = pageData || {};
+
+  // Defining props to pass in the CTA Button component
   const ctaButtonProps = {
     text: articleText.cta && articleText.cta.text,
     link: articleText.cta && articleText.cta.link,
     linkOut: articleText.cta && articleText.cta.linkOut,
   };
 
+  // Callback to handle Thumbnail Click
   const handleThumbnailClick = (backgroundUrl, foregroundUrl) => {
     setBackgroundImage(backgroundUrl);
     setForegroundImage(foregroundUrl);
   };
 
   return (
-    <>
+    <div>
       {!error && !isLoading ? (
         <div className="product-container">
           <div className="image-container">
@@ -67,14 +73,13 @@ const ProductInfo = ({ pageId }) => {
                 <img
                   src={foregroundImage}
                   alt="Foreground"
-                  onError={({ currentTarget }) => {
+                  onError={({ currentTarget }) => { // Fallback image if the image load fails
                     currentTarget.onerror = null;
                     currentTarget.src = "/assets/1-foreground-cutout.png";
                   }}
                 />
               </div>
             )}
-
             <div className="gradient-overlay" />
           </div>
 
@@ -96,7 +101,7 @@ const ProductInfo = ({ pageId }) => {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="error-container">
           <div className="error">{error}</div>
           <button
             className="retry-button"
@@ -106,7 +111,7 @@ const ProductInfo = ({ pageId }) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
