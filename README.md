@@ -5,10 +5,13 @@ This Ricobot project was bootstrapped with [Create React App](https://github.com
 ## Steps to Run
 
 1. Clone the Repo
-2. Do an `npm install`
-3. Start mock server with `npm run mock-server`
-4. Run app with `npm start`
-5. Open [http://localhost:3000/ricobot](http://localhost:3000/ricobot) to view it in your browser
+2. Comment out/in the following:
+    - comment out: `export const hostUrl = 'api/';`
+    - comment in: `export const hostUrl = 'http://localhost:5000/'`
+3. Do an `npm install`
+4. Start mock server with `npm run mock-server`
+5. Run app with `npm start`
+6. Open [http://localhost:3000/ricobot](http://localhost:3000/ricobot) to view it in your browser
 
 ### Mock Server config
 
