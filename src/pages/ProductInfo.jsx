@@ -17,7 +17,7 @@ const ProductInfo = ({ pageId }) => {
   const pageData = useSelector((state) => state.pagedata);
 
   useEffect(() => {
-    dispatch(getPageData());
+    dispatch(getPageData(pageId));
   }, [dispatch]);
 
   useEffect(() => {
@@ -33,11 +33,11 @@ const ProductInfo = ({ pageId }) => {
     img.src = backgroundImage;
 
     img.onerror = () => {
-      setBackgroundImage('/assets/1-background.png'); 
+      setBackgroundImage("/assets/1-background.png");
     };
-  }, [backgroundImage]); 
+  }, [backgroundImage]);
 
-  const { articleText, articleImages } = pageData || {};
+  const { articleText, articleImages, isLoading, error } = pageData || {};
   const ctaButtonProps = {
     text: articleText.cta && articleText.cta.text,
     link: articleText.cta && articleText.cta.link,
@@ -50,54 +50,63 @@ const ProductInfo = ({ pageId }) => {
   };
 
   return (
-    <div
-      className="product-container"
-      // style={{
-      //   backgroundImage: `url(${backgroundImage})`,
-      // }}
-    >
-      <div className="image-container">
-        <div
-          className="background"
-          style={{
-            backgroundImage: `
-            url(${backgroundImage})
-          `,
-          }}
-        />
-        {foregroundImage && (
-          <div className="foreground">
-            <img
-              src={foregroundImage}
-              alt="Foreground"
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null;
-                currentTarget.src="/assets/1-foreground-cutout.png";
+    <>
+      {!error && !isLoading ? (
+        <div className="product-container">
+          <div className="image-container">
+            <div
+              className="background"
+              style={{
+                backgroundImage: `
+                url(${backgroundImage})
+              `,
               }}
             />
+            {foregroundImage && (
+              <div className="foreground">
+                <img
+                  src={foregroundImage}
+                  alt="Foreground"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = "/assets/1-foreground-cutout.png";
+                  }}
+                />
+              </div>
+            )}
+
+            <div className="gradient-overlay" />
           </div>
-        )}
 
-        <div className="gradient-overlay" />
-      </div>
+          <div className="product-content">
+            <div className="product-header">{articleText.header}</div>
+            {articleText.banner && <Chip text={articleText.banner} />}
+            <div className="product-title">{articleText.title}</div>
+            <div className="product-description">{articleText.description}</div>
+            {articleText.cta && articleText.cta.text && (
+              <CtaButton {...ctaButtonProps} />
+            )}
 
-      <div className="product-content">
-        <div className="product-header">{articleText.header}</div>
-        {articleText.banner && <Chip text={articleText.banner} />}
-        <div className="product-title">{articleText.title}</div>
-        <div className="product-description">{articleText.description}</div>
-        {articleText.cta && articleText.cta.text && (
-          <CtaButton {...ctaButtonProps} />
-        )}
-
-        {articleImages && articleImages.length > 0 && (
-          <Thumbnails
-            images={articleImages}
-            onThumbnailClick={handleThumbnailClick}
-          />
-        )}
-      </div>
-    </div>
+            {articleImages && articleImages.length > 0 && (
+              <Thumbnails
+                images={articleImages}
+                onThumbnailClick={handleThumbnailClick}
+              />
+            )}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="error">{error}</div>
+          <button
+            className="retry-button"
+            onClick={() => dispatch(getPageData(pageId))}
+          >
+            Click to retry
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
