@@ -2,7 +2,7 @@ import { GET_PAGEDATA, GET_PAGEDATA_START, GET_PAGEDATA_ERROR } from "./types";
 
 export const initialState = {
   articleText: {},
-  articleImages: {},
+  articleImages: [],
   isLoading: false,
   error: null,
 };
@@ -15,8 +15,8 @@ export default function (state = initialState, action) {
     case GET_PAGEDATA:
       return {
         ...state,
-        articleText: action.payload["article-text"],
-        articleImages: action.payload["article-images"],
+        articleText: action.payload["article-text"] || {},
+        articleImages: action.payload["article-images"] || [],
         isLoading: false,
         error: null
       };
