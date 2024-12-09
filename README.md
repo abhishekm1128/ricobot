@@ -5,7 +5,7 @@ This Ricobot project was bootstrapped with [Create React App](https://github.com
 ## Steps to Run
 
 1. Clone the Repo
-2. Comment out/in the following:
+2. Comment out/in the following from `hostUrl.js`:
     - comment out: `export const hostUrl = 'api/';`
     - comment in: `export const hostUrl = 'http://localhost:5000/'`
 3. Do an `npm install`
