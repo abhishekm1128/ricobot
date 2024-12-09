@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { withTheme } from "styled-components";
 import { getPageData } from "./../store/productInfo/action";
 import Chip from "../components/Chip/Chip";
 import CtaButton from "../components/CtaButton/CtaButton";
@@ -18,12 +19,12 @@ const ProductInfo = ({ pageId }) => {
   useEffect(() => {
     dispatch(getPageData());
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (pageData?.articleImages?.length > 0) {
       const [image] = pageData.articleImages;
-      setBackgroundImage(image['background-url']);
-      setForegroundImage(image['foreground-url']);
+      setBackgroundImage(image["background-url"] || "");
+      setForegroundImage(image["foreground-url"] || "");
     }
   }, [pageData]);
 
@@ -46,24 +47,27 @@ const ProductInfo = ({ pageId }) => {
       //   backgroundImage: `url(${backgroundImage})`,
       // }}
     >
-      <div
-        className="background"
-        style={{
-          backgroundImage: `
+      <div className="image-container">
+        <div
+          className="background"
+          style={{
+            backgroundImage: `
             url(${backgroundImage})
           `,
-        }}
-      />
-      {foregroundImage && (
-        <div className="foreground">
-          <img src={foregroundImage} alt="Tablet" />
-        </div>
-      )}
+          }}
+        />
+        {foregroundImage && (
+          <div className="foreground">
+            <img src={foregroundImage} alt="Tablet" />
+          </div>
+        )}
 
-    <div className="gradient-overlay" />
+        <div className="gradient-overlay" />
+      </div>
+
       <div className="product-content">
         <div className="product-header">{articleText.header}</div>
-        <Chip text={articleText.banner} />
+        {articleText.banner && <Chip text={articleText.banner} />}
         <div className="product-title">{articleText.title}</div>
         <div className="product-description">{articleText.description}</div>
         {articleText.cta && articleText.cta.text && (
@@ -81,4 +85,4 @@ const ProductInfo = ({ pageId }) => {
   );
 };
 
-export default ProductInfo;
+export default withTheme(ProductInfo);

@@ -1,14 +1,22 @@
 .product-container {
-  width: 100%;
-  height: 768px;
-  margin: 90px 0px;
+  width: 100vw;
+  margin: 70px 0px;
   background-size: cover;
   background-position: center;
   position: absolute;
   top: 0;
-  min-width: 880px;
+  min-width: 0px;
   left: 0;
   z-index: 1; /* Background stays behind */
+  background-color: black;
+
+  @media (min-width: 481px) {
+    margin: 90px 0px;
+    background-color: #fff;
+    width: 100%;
+    min-width: 880px;
+    height: 768px;
+  }
 
   .product-content {
     max-width: 944px;
@@ -17,16 +25,32 @@
     position: relative;
     z-index: 4;
     .product-header {
-      width: 220px;
+      width: 140px;
       padding-bottom: 40px;
-      padding-top: 80px;
+      padding-top: 14px;
+      @media (min-width: 481px) {
+        width: 220px;
+        padding-top: 80px;
+      }
     }
     .product-title {
       margin: 0px;
     }
     .product-description {
-      width: 50%;
+      width: 100%;
       margin: 16px 0px 32px 0px;
+      @media (min-width: 481px) {
+        width: 50%;
+      }
+    }
+  }
+
+  .image-container {
+    @media (max-width: 480px) {
+      width: 100vw;
+      position: absolute;
+      margin: 0px;
+      height: 32vh;
     }
   }
 
@@ -34,13 +58,26 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Keep it behind other elements */
+    width: 100vw;
+    height: 32vh;
+    z-index: -1;
     margin-top: 0px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
+    @media (min-width: 481px) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; /* Make the height equal to the height of the viewport */
+      z-index: -1;
+      margin-top: 0px;
+      background-size: cover; /* Ensures the image covers the container */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat;
+    }
     .overlay {
       position: absolute;
       max-width: 1024px;
@@ -62,16 +99,16 @@
     bottom: 0px; /* Desktop overflow */
     left: 50%;
     margin-bottom: 0px;
-    height: calc(100% + 90px);
-    width: 50%; /* Desktop size */
+    width: 40%; /* Desktop size */
+    height: calc(100% + 70px);
     z-index: 3; /* Above background and gradient */
     pointer-events: none; /* Prevent interaction */
     img {
       height: -webkit-fill-available;
     }
-    @media (max-width: 768px) {
-      // bottom: -70px; /* Mobile overflow */
-      // width: 40%; /* Mobile size */
+    @media (min-width: 481px) {
+      height: calc(100% + 90px);
+      width: 50%;
     }
   }
 

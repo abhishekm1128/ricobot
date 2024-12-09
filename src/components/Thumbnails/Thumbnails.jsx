@@ -19,7 +19,7 @@ const Thumbnails = ({ images, onThumbnailClick }) => {
     <div className="thumbnail-container">
       {images &&
         images.length > 0 &&
-        images.map((image) => (
+        images.sort((a, b) => a.order - b.order).map((image) => (
           <div
             key={image.id}
             className="thumbnail-wrapper"
